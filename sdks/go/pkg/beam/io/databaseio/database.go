@@ -22,8 +22,8 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/apache/beam/sdks/go/pkg/beam"
-	"github.com/apache/beam/sdks/go/pkg/beam/internal/errors"
 	"github.com/apache/beam/sdks/go/pkg/beam/log"
+	"github.com/garupanojisan/beam/sdks/go/pkg/beam/internal/errors"
 	"reflect"
 	"strings"
 )
@@ -67,7 +67,7 @@ type queryFn struct {
 	Type beam.EncodedType `json:"type"`
 }
 
-func (f *queryFn) ProcessElement(ctx context.Context, _ []byte, emit func(beam.X)) error {
+func (f *queryFn) ProcessElementFn(ctx context.Context, _ []byte, emit func(beam.X)) error {
 	//TODO move DB Open and Close to Setup and Teardown methods or StartBundle and FinishBundle
 	db, err := sql.Open(f.Driver, f.Dsn)
 	if err != nil {
